@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MyTT</string>
+    <string name="title_activity_main">MyTT</string>
+    <string name="resend_code">Renvoyer le code</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>

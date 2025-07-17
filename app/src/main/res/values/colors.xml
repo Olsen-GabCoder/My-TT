@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Couleurs de base de la charte graphique MyTT -->
+    <color name="mytt_purple_dark">#4A00E0</color> <!-- Violet du header -->
+    <color name="mytt_purple_light">#8E2DE2</color> <!-- Pour les dégradés -->
+    <color name="mytt_pink">#E80A89</color> <!-- Rose vif du bouton Login -->
+    <color name="mytt_blue_lavender">#8A93E5</color> <!-- Bleu du bouton Mode Invité -->
+    <color name="mytt_background_grey">#F5F5F7</color> <!-- Gris très clair pour le fond du body -->
+
+    <!-- Couleurs standard -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="grey">#888888</color>
+</resources>

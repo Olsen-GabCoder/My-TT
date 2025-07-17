@@ -1,0 +1,18 @@
+<!-- Fichier : app/src/main/res/values/themes.xml -->
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Thème de base de l'application. -->
+    <style name="Base.Theme.MyTT" parent="Theme.Material3.DayNight.NoActionBar">
+        <!-- Couleurs primaires de la marque -->
+        <item name="colorPrimary">@color/mytt_purple_dark</item>
+        <item name="colorPrimaryVariant">@color/mytt_purple_light</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Couleurs secondaires de la marque -->
+        <item name="colorSecondary">@color/mytt_pink</item>
+        <item name="colorSecondaryVariant">@color/mytt_pink</item>
+        <item name="colorOnSecondary">@color/white</item>
+        <!-- Couleur de la barre de statut -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+    </style>
+
+    <style name="Theme.MyTT" parent="Base.Theme.MyTT" />
+</resources>

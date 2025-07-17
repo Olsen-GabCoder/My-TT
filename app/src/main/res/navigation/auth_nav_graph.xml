@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Graphe de navigation pour le flux d'authentification.
+    Ce fichier est la "carte" qui définit tous les écrans (fragments) de cette section
+    et les chemins possibles pour naviguer entre eux.
+-->
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/auth_nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <!--
+        Déclaration de notre premier (et pour l'instant unique) écran : le LoginFragment.
+        C'est la destination de départ de ce graphe, comme défini par l'attribut
+        app:startDestination ci-dessus.
+    -->
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.mytt.app.features.authentication.ui.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login" />
+
+</navigation>

@@ -1,0 +1,73 @@
+# Fichier centralisé pour la gestion des versions des dépendances et des plugins.
+# Chaque modification ici est répercutée sur tout le projet.
+
+[versions]
+# --- Plugins ---
+agp = "8.4.1"
+kotlin = "1.9.23"
+googleServices = "4.4.2"
+hilt = "2.51.1" # NOUVEAU : Version pour Hilt
+navigationSafeArgs = "2.7.7" # NOUVEAU : Version pour le plugin Safe Args
+
+# --- Bibliothèques AndroidX ---
+coreKtx = "1.13.1"
+appcompat = "1.7.0"
+material = "1.12.0"
+constraintlayout = "2.1.4"
+activityKtx = "1.9.0" # Renommé depuis "activity" pour plus de clarté
+fragmentKtx = "1.8.1" # NOUVEAU : Dépendance essentielle pour la gestion des Fragments
+lifecycle = "2.8.3" # NOUVEAU : Version pour ViewModel & LiveData
+navigation = "2.7.7" # MISE À JOUR : Version stable pour Navigation Component
+
+# --- Firebase & Google Play Services ---
+firebaseBom = "33.1.2" # MISE À JOUR : Dernière BOM stable
+playServicesAuth = "21.2.0"
+
+# --- Tests ---
+junit = "4.13.2"
+junitVersion = "1.1.5"
+espressoCore = "3.5.1"
+
+
+[libraries]
+# --- AndroidX Core & UI ---
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+androidx-activity-ktx = { group = "androidx.activity", name = "activity-ktx", version.ref = "activityKtx" } # Renommé depuis "activity"
+androidx-fragment-ktx = { group = "androidx.fragment", name = "fragment-ktx", version.ref = "fragmentKtx" } # NOUVEAU
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+
+# --- Architecture Components (ViewModel, LiveData, Navigation) ---
+androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycle" } # NOUVEAU
+androidx-lifecycle-livedata-ktx = { group = "androidx.lifecycle", name = "lifecycle-livedata-ktx", version.ref = "lifecycle" } # NOUVEAU
+androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigation" }
+androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigation" }
+
+# --- Injection de Dépendances (Hilt) ---
+hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" } # NOUVEAU
+hilt-compiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" } # NOUVEAU
+
+# --- Firebase & Google Play Services ---
+firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
+firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics" } # La version est gérée par la BOM
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore-ktx" }
+firebase-storage = { group = "com.google.firebase", name = "firebase-storage-ktx" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging-ktx" }
+firebase-functions = { group = "com.google.firebase", name = "firebase-functions-ktx" }
+firebase-appcheck-playintegrity = { group = "com.google.firebase", name = "firebase-appcheck-playintegrity" }
+play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "playServicesAuth" }
+
+# --- Tests ---
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "agp" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+google-gms-services = { id = "com.google.gms.google-services", version.ref = "googleServices" }
+hilt-gradle = { id = "com.google.dagger.hilt.android", version.ref = "hilt" } # NOUVEAU
+navigation-safeargs = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigationSafeArgs" } # NOUVEAU
