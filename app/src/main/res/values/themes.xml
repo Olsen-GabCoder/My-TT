@@ -1,18 +1,46 @@
-<!-- Fichier : app/src/main/res/values/themes.xml -->
+<?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Thème de base de l'application. -->
     <style name="Base.Theme.MyTT" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Couleurs primaires de la marque -->
+        <!-- ... (vos couleurs primaires et secondaires restent ici) ... -->
         <item name="colorPrimary">@color/mytt_purple_dark</item>
         <item name="colorPrimaryVariant">@color/mytt_purple_light</item>
         <item name="colorOnPrimary">@color/white</item>
-        <!-- Couleurs secondaires de la marque -->
         <item name="colorSecondary">@color/mytt_pink</item>
         <item name="colorSecondaryVariant">@color/mytt_pink</item>
         <item name="colorOnSecondary">@color/white</item>
-        <!-- Couleur de la barre de statut -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:statusBarColor">@color/mytt_purple_dark</item>
     </style>
 
     <style name="Theme.MyTT" parent="Base.Theme.MyTT" />
+
+    <!--
+        NOUVEAU : Style personnalisé pour notre bouton principal.
+        Il hérite de Widget.Material3.Button qui garantit tous les bons
+        comportements (clic, ripple, etc.).
+    -->
+    <style name="Widget.MyTT.Button.Primary" parent="Widget.Material3.Button">
+        <!-- On change la couleur de fond en utilisant backgroundTint -->
+        <item name="backgroundTint">@color/mytt_pink</item>
+        <!-- On change la couleur du texte -->
+        <item name="android:textColor">@color/white</item>
+        <!-- On définit la forme des coins pour être entièrement arrondis -->
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.MyTT.Button.Pill</item>
+    </style>
+
+    <style name="Widget.MyTT.ActionCard" parent="Widget.Material3.CardView.Elevated">
+        <!-- Marge extérieure pour que les cartes ne soient pas collées -->
+        <item name="android:layout_margin">8dp</item>
+        <!-- Permet au clic d'avoir un effet visuel (ripple) -->
+        <item name="android:clickable">true</item>
+        <item name="android:focusable">true</item>
+        <!-- Couleur de l'effet "ripple" au clic -->
+        <item name="rippleColor">@color/mytt_purple_light</item>
+    </style>
+
+    <!-- NOUVEAU : Style de forme pour le bouton "pilule" -->
+    <style name="ShapeAppearance.MyTT.Button.Pill" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
 </resources>

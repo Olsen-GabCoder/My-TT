@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Drawable qui définit le style du bouton de connexion principal.
+    Forme rectangulaire avec un fond rose vif et des coins très arrondis
+    pour donner un aspect de "pilule".
+-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Couleur de fond rose, issue de notre charte graphique -->
+    <solid android:color="@color/rose_primary" />
+
+    <!--
+        Un grand rayon pour les coins. En utilisant une valeur élevée (ex: 50dp),
+        nous nous assurons que le bouton aura toujours des bords
+        parfaitement semi-circulaires, quelle que soit sa hauteur.
+    -->
+    <corners android:radius="50dp" />
+
+</shape>

@@ -1,0 +1,90 @@
+<!-- Fichier : app/src/main/res/layout/fragment_dashboard.xml -->
+
+<androidx.core.widget.NestedScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mytt_background_grey"
+    android:fillViewport="true"
+    tools:context=".features.client.dashboard.ui.DashboardFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="16dp">
+
+        <!-- BLOC 1 : Message de bienvenue. -->
+        <TextView
+            android:id="@+id/textViewUserName"
+            style="@style/TextAppearance.Material3.HeadlineSmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:paddingTop="16dp"
+            android:textStyle="bold"
+            tools:text="Bonjour, Utilisateur !" />
+
+        <!-- BLOC 2 : Carte de solde enrichie. -->
+        <include
+            android:id="@+id/view_balance_card_v2"
+            layout="@layout/view_balance_card_v2" />
+
+
+        <!-- BLOC 3 : Section des raccourcis intelligents. -->
+        <TextView
+            style="@style/TextAppearance.Material3.TitleMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Raccourcis"
+            android:textStyle="bold" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_shortcuts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="4"
+            tools:listitem="@layout/item_dashboard_action" />
+
+
+        <!-- BLOC 4 : Section "Pour vous" avec carrousel d'offres. -->
+        <TextView
+            style="@style/TextAppearance.Material3.TitleMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Pour vous"
+            android:textStyle="bold" />
+
+        <!--
+            MODIFICATION : Le FrameLayout a été remplacé par ce RecyclerView.
+            C'est notre carrousel d'offres.
+        -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_promo_offers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:clipToPadding="false"
+            android:orientation="horizontal"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            tools:itemCount="2"
+            tools:listitem="@layout/item_promo_offer" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

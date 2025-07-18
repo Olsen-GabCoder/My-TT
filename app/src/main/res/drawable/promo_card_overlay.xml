@@ -1,0 +1,10 @@
+<!-- Fichier : res/drawable/promo_card_overlay.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <!-- Dégradé allant du noir semi-transparent en bas vers le transparent total en haut. -->
+    <gradient
+        android:angle="270"
+        android:endColor="#00000000"
+        android:startColor="#B3000000"
+        android:type="linear" />
+</shape>

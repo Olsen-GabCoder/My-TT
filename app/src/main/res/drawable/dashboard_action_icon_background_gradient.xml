@@ -1,0 +1,16 @@
+<!-- Fichier : app/src/main/res/drawable/dashboard_action_icon_background_gradient.xml -->
+<!-- Ceci est une forme ovale avec un fond en dégradé linéaire. -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <!--
+        Le dégradé utilise les couleurs de votre charte pour un effet "Whaou"
+        et une forte identité de marque.
+    -->
+    <gradient
+        android:angle="45"
+        android:endColor="@color/mytt_purple_dark"
+        android:startColor="@color/mytt_purple_light"
+        android:type="linear" />
+
+</shape>

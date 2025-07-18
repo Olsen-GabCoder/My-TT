@@ -1,0 +1,66 @@
+<!-- Fichier : res/layout/item_promo_offer.xml -->
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="280dp"
+    android:layout_height="150dp"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="4dp">
+
+    <!-- Ce FrameLayout permet de superposer l'image, le dégradé et le texte. -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Image de fond de l'offre. Elle remplira toute la carte. -->
+        <ImageView
+            android:id="@+id/image_view_offer_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/placeholder_background"
+            android:contentDescription="Image promotionnelle"/>
+
+        <!--
+            Dégradé d'incrustation. Placé par-dessus l'image pour assurer
+            le contraste avec le texte qui viendra ensuite.
+        -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/promo_card_overlay" />
+
+        <!-- Conteneur pour le texte, aligné en bas de la carte. -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/text_view_offer_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                tools:text="Double Data" />
+
+            <TextView
+                android:id="@+id/text_view_offer_subtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:alpha="0.9"
+                android:textSize="14sp"
+                tools:text="Activez l'option et profitez !" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</com.google.android.material.card.MaterialCardView>

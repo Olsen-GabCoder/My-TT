@@ -1,0 +1,30 @@
+<!-- Fichier : app/src/main/res/menu/client_bottom_nav_menu.xml -->
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/dashboardFragment"
+        android:icon="@drawable/ic_home"
+        android:title="@string/bottom_nav_home" />
+
+    <item
+        android:id="@+id/consumptionFragment"
+        android:icon="@drawable/ic_data_usage"
+        android:title="@string/bottom_nav_consumption" />
+
+    <item
+        android:id="@+id/offersFragment"
+        android:icon="@drawable/ic_offers"
+        android:title="@string/bottom_nav_offers" />
+
+    <item
+        android:id="@+id/invoicesFragment"
+        android:icon="@drawable/ic_billing"
+        android:title="@string/bottom_nav_billing" />
+
+    <item
+        android:id="@+id/contactSupportFragment"
+        android:icon="@drawable/ic_support"
+        android:title="@string/bottom_nav_support" />
+
+</menu>

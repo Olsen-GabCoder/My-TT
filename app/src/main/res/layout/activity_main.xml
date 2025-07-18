@@ -1,19 +1,42 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- Fichier : app/src/main/res/layout/activity_main.xml -->
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".features.client.MainActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <!--
+        MODIFICATION 1 : Le NavHostFragment ne remplit plus tout l'écran.
+        Sa contrainte inférieure est maintenant attachée au-dessus de la barre de navigation.
+        Sa hauteur passe à "0dp" pour remplir l'espace disponible entre le haut de l'écran
+        et le haut de la barre de navigation.
+    -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/nav_host_fragment_client"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:defaultNavHost="true"
+        app:layout_constraintBottom_toTopOf="@id/bottom_nav_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navGraph="@navigation/client_nav_graph" />
+
+    <!--
+        MODIFICATION 2 : Ajout de la BottomNavigationView.
+        Elle est contrainte en bas de l'écran et utilise le menu
+        que nous avons créé à l'étape précédente.
+    -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottom_nav_view"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:menu="@menu/client_bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

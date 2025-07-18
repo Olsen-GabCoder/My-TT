@@ -1,0 +1,10 @@
+<!-- Fichier : res/drawable/balance_card_background_gradient.xml -->
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+    <corners android:radius="20dp" />
+    <gradient
+        android:angle="135"
+        android:endColor="@color/mytt_purple_dark"
+        android:startColor="@color/mytt_purple_light"
+        android:type="linear" />
+</shape>

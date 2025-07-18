@@ -25,13 +25,20 @@
             </intent-filter>
         </activity>
 
-        <!--
-            NOUVEAU : Déclaration de l'activité d'authentification.
-            Elle est maintenant un composant reconnu par le système.
-        -->
         <activity
             android:name=".features.authentication.ui.AuthActivity"
             android:exported="false" />
 
+        <!--
+            NOUVEAU : Déclaration de l'activité principale de l'espace client.
+            Elle n'est pas exportée, car elle ne doit être lancée que depuis notre
+            propre application, après une connexion réussie.
+        -->
+        <activity
+            android:name=".features.client.MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".features.admin.AdminActivity"
+            android:exported="false" />
     </application>
 </manifest>

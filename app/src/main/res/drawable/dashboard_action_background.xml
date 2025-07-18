@@ -1,0 +1,9 @@
+<!-- Fichier : app/src/main/res/drawable/dashboard_action_background.xml -->
+
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="oval">
+
+    <!-- Utilisation de VOTRE couleur de fond standard pour la cohérence -->
+    <solid android:color="@color/mytt_background_grey" />
+
+</shape>

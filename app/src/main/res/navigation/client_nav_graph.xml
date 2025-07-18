@@ -1,6 +1,56 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+    Graphe de navigation pour le flux de l'espace client.
+-->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/client_nav_graph">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/client_nav_graph"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.mytt.app.features.client.dashboard.ui.DashboardFragment"
+        android:label="DashboardFragment"
+        tools:layout="@layout/fragment_dashboard">
+
+        <action
+            android:id="@+id/action_dashboardFragment_to_consumptionFragment"
+            app:destination="@id/consumptionFragment" />
+
+        <action
+            android:id="@+id/action_dashboardFragment_to_offersFragment"
+            app:destination="@id/offersFragment" />
+
+        <!--
+            NOUVEAU : Action qui définit la navigation vers l'écran des factures.
+        -->
+        <action
+            android:id="@+id/action_dashboardFragment_to_invoicesFragment"
+            app:destination="@id/invoicesFragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/consumptionFragment"
+        android:name="com.mytt.app.features.client.consumption.ui.ConsumptionFragment"
+        android:label="ConsumptionFragment"
+        tools:layout="@layout/fragment_consumption" />
+
+    <fragment
+        android:id="@+id/offersFragment"
+        android:name="com.mytt.app.features.client.offers.ui.OffersFragment"
+        android:label="OffersFragment"
+        tools:layout="@layout/fragment_offers" />
+
+    <!--
+        NOUVEAU : Déclaration du InvoicesFragment comme destination dans ce graphe.
+        Notez le chemin du package "billing" qui est correct.
+    -->
+    <fragment
+        android:id="@+id/invoicesFragment"
+        android:name="com.mytt.app.features.client.billing.ui.InvoicesFragment"
+        android:label="InvoicesFragment"
+        tools:layout="@layout/fragment_invoices" />
 
 </navigation>

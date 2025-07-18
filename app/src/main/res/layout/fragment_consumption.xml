@@ -1,14 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--
+    Layout pour l'écran de suivi de la consommation.
+    MODIFIÉ pour afficher 3 cartes de solde distinctes.
+-->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".features.client.consumption.ui.ConsumptionFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <!-- En-tête de l'écran -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/textViewTitle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Ma Consommation"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <!-- Carte pour le Solde Principal -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardBalance"
+        style="@style/Widget.Material3.CardView.Outlined"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textViewTitle">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/iconBalance"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_wallet"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/mytt_purple_dark" />
+
+            <TextView
+                android:id="@+id/textViewBalanceValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iconBalance"
+                app:layout_constraintTop_toTopOf="@id/iconBalance"
+                tools:text="33,00 CFA" />
+
+            <TextView
+                android:id="@+id/textViewBalanceLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Solde Principal"
+                app:layout_constraintEnd_toEndOf="@id/textViewBalanceValue"
+                app:layout_constraintStart_toStartOf="@id/textViewBalanceValue"
+                app:layout_constraintTop_toBottomOf="@id/textViewBalanceValue" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Carte pour le Solde d'Appels -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardCallBalance"
+        style="@style/Widget.Material3.CardView.Outlined"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardBalance">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/iconCallBalance"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_call"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/mytt_purple_dark" />
+
+            <TextView
+                android:id="@+id/textViewCallBalanceValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iconCallBalance"
+                app:layout_constraintTop_toTopOf="@id/iconCallBalance"
+                tools:text="0 Mins" />
+
+            <TextView
+                android:id="@+id/textViewCallBalanceLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Solde Appel"
+                app:layout_constraintEnd_toEndOf="@id/textViewCallBalanceValue"
+                app:layout_constraintStart_toStartOf="@id/textViewCallBalanceValue"
+                app:layout_constraintTop_toBottomOf="@id/textViewCallBalanceValue" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Carte pour le Solde Internet -->
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardInternetBalance"
+        style="@style/Widget.Material3.CardView.Outlined"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cardCallBalance">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/iconInternetBalance"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_internet"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/mytt_purple_dark" />
+
+            <TextView
+                android:id="@+id/textViewInternetBalanceValue"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/iconInternetBalance"
+                app:layout_constraintTop_toTopOf="@id/iconInternetBalance"
+                tools:text="0 Ko" />
+
+            <TextView
+                android:id="@+id/textViewInternetBalanceLabel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="Solde Internet"
+                app:layout_constraintEnd_toEndOf="@id/textViewInternetBalanceValue"
+                app:layout_constraintStart_toStartOf="@id/textViewInternetBalanceValue"
+                app:layout_constraintTop_toBottomOf="@id/textViewInternetBalanceValue" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
