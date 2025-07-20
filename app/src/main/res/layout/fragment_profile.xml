@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/mytt_background_grey"
+    tools:context=".features.client.profile.ui.ProfileFragment">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorSurface"
+        app:elevation="0dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar_profile"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:title="Mon profil"
+            app:navigationIcon="@drawable/ic_arrow_back"/>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Zone Identité Utilisateur -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingBottom="24dp">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/imageViewProfileAvatar"
+                    android:layout_width="96dp"
+                    android:layout_height="96dp"
+                    android:padding="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/ic_profile"
+                    app:shapeAppearanceOverlay="@style/ShapeAppearance.MyTT.Button.Pill"
+                    app:strokeColor="@color/mytt_purple_light"
+                    app:strokeWidth="2dp"/>
+
+                <TextView
+                    android:id="@+id/textViewProfileName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    style="@style/TextAppearance.Material3.HeadlineSmall"
+                    android:textStyle="bold"
+                    tools:text="Utilisateur de Test" />
+
+                <TextView
+                    android:id="@+id/textViewProfilePhone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    style="@style/TextAppearance.Material3.TitleMedium"
+                    android:textColor="?attr/colorOnSurfaceVariant"
+                    tools:text="56 503 897" />
+            </LinearLayout>
+
+            <!-- Groupe Actions Principales -->
+            <TextView
+                style="@style/TextAppearance.Material3.TitleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Actions principales"
+                android:textAllCaps="true"
+                android:textColor="?attr/colorOnSurfaceVariant"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="16dp"
+                app:strokeWidth="0dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/item_profile_action" android:id="@+id/action_info"/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/mytt_background_grey" android:layout_marginStart="56dp"/>
+                    <include layout="@layout/item_profile_action" android:id="@+id/action_purchases"/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/mytt_background_grey" android:layout_marginStart="56dp"/>
+                    <include layout="@layout/item_profile_action" android:id="@+id/action_favorites"/>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Groupe Autres Actions -->
+            <TextView
+                style="@style/TextAppearance.Material3.TitleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Autres actions"
+                android:textAllCaps="true"
+                android:textColor="?attr/colorOnSurfaceVariant"/>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="16dp"
+                app:strokeWidth="0dp"
+                app:cardElevation="2dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/item_profile_action" android:id="@+id/action_settings"/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/mytt_background_grey" android:layout_marginStart="56dp"/>
+                    <include layout="@layout/item_profile_action" android:id="@+id/action_rate_app"/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/mytt_background_grey" android:layout_marginStart="56dp"/>
+                    <include layout="@layout/item_profile_action" android:id="@+id/action_support"/>
+                    <View android:layout_width="match_parent" android:layout_height="1dp" android:background="@color/mytt_background_grey" android:layout_marginStart="56dp"/>
+                    <include layout="@layout/item_profile_action" android:id="@+id/action_share"/>
+
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <!-- Bouton Déconnexion -->
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buttonLogout"
+                style="@style/Widget.Material3.Button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:paddingVertical="12dp"
+                android:text="Déconnexion"
+                app:backgroundTint="@color/mytt_pink"
+                app:cornerRadius="16dp" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

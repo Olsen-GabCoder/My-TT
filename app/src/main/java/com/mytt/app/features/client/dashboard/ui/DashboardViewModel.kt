@@ -1,42 +1,63 @@
+// Fichier : app/src/main/java/com/mytt/app/features/client/dashboard/ui/DashboardViewModel.kt
+
 package com.mytt.app.features.client.dashboard.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.FirebaseAuth
+import com.mytt.app.core.data.models.User
+import com.mytt.app.core.data.repository.AuthRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-/**
- * ViewModel pour le DashboardFragment.
- */
 @HiltViewModel
 class DashboardViewModel @Inject constructor(
-    // Injection du client FirebaseAuth pour accéder à l'état d'authentification actuel.
-    private val auth: FirebaseAuth
+    private val authRepository: AuthRepository,
+    private val firebaseAuth: FirebaseAuth
 ) : ViewModel() {
 
-    // LiveData pour exposer le nom de l'utilisateur à la vue.
-    private val _userName = MutableLiveData<String>()
-    val userName: LiveData<String> = _userName
+    private val _user = MutableLiveData<User>()
+    val user: LiveData<User> = _user
 
-    /**
-     * Le bloc init est exécuté une seule fois lors de la création du ViewModel.
-     * C'est l'endroit idéal pour charger les données initiales.
-     */
-    init {
-        loadUserName()
+    private val _error = MutableLiveData<String>()
+    val error: LiveData<String> = _error
+
+    // Le AuthStateListener qui réagira aux changements de connexion.
+    private val authStateListener = FirebaseAuth.AuthStateListener { auth ->
+        if (auth.currentUser != null) {
+            // Un utilisateur est détecté comme étant connecté.
+            // On lance la récupération de son profil Firestore.
+            loadCurrentUser()
+        } else {
+            // Aucun utilisateur n'est connecté.
+            _error.value = "Utilisateur déconnecté."
+        }
     }
 
-    /**
-     * Récupère l'utilisateur actuellement connecté et met à jour le LiveData.
-     */
-    private fun loadUserName() {
-        // Récupère l'utilisateur courant depuis FirebaseAuth.
-        val currentUser = auth.currentUser
+    init {
+        // Attache l'écouteur. Il sera appelé immédiatement avec l'état actuel,
+        // puis à chaque changement d'état.
+        firebaseAuth.addAuthStateListener(authStateListener)
+    }
 
-        // Met à jour le LiveData avec le nom d'affichage de l'utilisateur,
-        // ou son email s'il n'a pas de nom, ou "Utilisateur" par défaut.
-        _userName.value = currentUser?.displayName ?: currentUser?.email ?: "Utilisateur"
+    private fun loadCurrentUser() {
+        viewModelScope.launch {
+            val result = authRepository.getCurrentUser()
+            result.onSuccess { user ->
+                _user.value = user
+            }.onFailure { exception ->
+                _error.value = exception.message ?: "Impossible de charger les informations de l'utilisateur."
+            }
+        }
+    }
+
+    // Il est crucial de détacher le listener lorsque le ViewModel est détruit
+    // pour éviter les fuites de mémoire.
+    override fun onCleared() {
+        super.onCleared()
+        firebaseAuth.removeAuthStateListener(authStateListener)
     }
 }

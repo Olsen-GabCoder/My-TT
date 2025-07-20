@@ -2,7 +2,7 @@ package com.mytt.app.core.di
 
 import com.mytt.app.core.data.repository.AuthRepository
 import com.mytt.app.core.data.repository.OffersRepository
-import com.mytt.app.features.authentication.data.AuthRepositoryImpl
+import com.mytt.app.core.data.repository.AuthRepositoryImpl
 import com.mytt.app.features.client.offers.data.repository.OffersRepositoryImpl
 import dagger.Binds
 import dagger.Module

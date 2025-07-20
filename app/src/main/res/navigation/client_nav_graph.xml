@@ -1,7 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-    Graphe de navigation pour le flux de l'espace client.
--->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -14,20 +11,21 @@
         android:label="DashboardFragment"
         tools:layout="@layout/fragment_dashboard">
 
+        <!-- Actions existantes -->
         <action
             android:id="@+id/action_dashboardFragment_to_consumptionFragment"
             app:destination="@id/consumptionFragment" />
-
         <action
             android:id="@+id/action_dashboardFragment_to_offersFragment"
             app:destination="@id/offersFragment" />
-
-        <!--
-            NOUVEAU : Action qui définit la navigation vers l'écran des factures.
-        -->
         <action
             android:id="@+id/action_dashboardFragment_to_invoicesFragment"
             app:destination="@id/invoicesFragment" />
+
+        <!-- MODIFICATION : Ajout de l'action pour naviguer vers le profil -->
+        <action
+            android:id="@+id/action_dashboardFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
 
     </fragment>
 
@@ -43,14 +41,17 @@
         android:label="OffersFragment"
         tools:layout="@layout/fragment_offers" />
 
-    <!--
-        NOUVEAU : Déclaration du InvoicesFragment comme destination dans ce graphe.
-        Notez le chemin du package "billing" qui est correct.
-    -->
     <fragment
         android:id="@+id/invoicesFragment"
         android:name="com.mytt.app.features.client.billing.ui.InvoicesFragment"
         android:label="InvoicesFragment"
         tools:layout="@layout/fragment_invoices" />
+
+    <!-- MODIFICATION : Ajout de la nouvelle destination pour le profil -->
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.mytt.app.features.client.profile.ui.ProfileFragment"
+        android:label="ProfileFragment"
+        tools:layout="@layout/fragment_profile" />
 
 </navigation>

@@ -1,24 +1,65 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-    Graphe de navigation pour le flux d'authentification.
-    Ce fichier est la "carte" qui définit tous les écrans (fragments) de cette section
-    et les chemins possibles pour naviguer entre eux.
--->
+<!-- Fichier : app/src/main/res/navigation/auth_nav_graph.xml -->
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/auth_nav_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/phoneEntryFragment">
 
-    <!--
-        Déclaration de notre premier (et pour l'instant unique) écran : le LoginFragment.
-        C'est la destination de départ de ce graphe, comme défini par l'attribut
-        app:startDestination ci-dessus.
-    -->
+    <fragment
+        android:id="@+id/phoneEntryFragment"
+        android:name="com.mytt.app.features.authentication.ui.PhoneEntryFragment"
+        android:label="PhoneEntryFragment"
+        tools:layout="@layout/fragment_phone_entry">
+
+        <action
+            android:id="@+id/action_phoneEntryFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+
+        <action
+            android:id="@+id/action_phoneEntryFragment_to_otpEntryFragment"
+            app:destination="@id/otpEntryFragment" />
+    </fragment>
+
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.mytt.app.features.authentication.ui.LoginFragment"
         android:label="LoginFragment"
-        tools:layout="@layout/fragment_login" />
+        tools:layout="@layout/fragment_login">
+
+        <!-- NOUVEAU : Action pour naviguer de l'écran de login vers l'écran d'enregistrement. -->
+        <action
+            android:id="@+id/action_loginFragment_to_registrationFragment"
+            app:destination="@id/registrationFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/otpEntryFragment"
+        android:name="com.mytt.app.features.authentication.ui.OtpEntryFragment"
+        android:label="OtpEntryFragment"
+        tools:layout="@layout/fragment_otp_entry">
+
+        <argument
+            android:name="verificationId"
+            app:argType="string" />
+
+        <argument
+            android:name="phoneNumber"
+            app:argType="string" />
+    </fragment>
+
+    <!--
+        NOUVEAU : Déclaration du fragment d'enregistrement.
+    -->
+    <fragment
+        android:id="@+id/registrationFragment"
+        android:name="com.mytt.app.features.authentication.ui.RegistrationFragment"
+        android:label="RegistrationFragment"
+        tools:layout="@layout/fragment_registration">
+
+        <!-- Action pour revenir de l'enregistrement vers l'écran de login. -->
+        <action
+            android:id="@+id/action_registrationFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 
 </navigation>

@@ -84,7 +84,11 @@ dependencies {
     implementation(libs.firebase.messaging)
     implementation(libs.firebase.functions)
     implementation(libs.firebase.appcheck.playintegrity)
-    implementation(libs.play.services.auth) // Pour l'authentification Google
+    implementation(libs.play.services.auth)
+    implementation("com.google.firebase:firebase-appcheck-ktx")
+    implementation("com.google.firebase:firebase-appcheck-playintegrity")
+    debugImplementation("com.google.firebase:firebase-appcheck-debug")
+    implementation("io.coil-kt:coil:2.4.0")
 
     // --- Tests ---
     testImplementation(libs.junit)

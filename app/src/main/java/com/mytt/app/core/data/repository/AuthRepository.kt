@@ -1,20 +1,28 @@
 package com.mytt.app.core.data.repository
 
+import android.app.Activity
+import com.google.firebase.auth.PhoneAuthProvider
 import com.mytt.app.core.data.models.User
 
-/**
- * Interface pour le dépôt d'authentification.
- */
 interface AuthRepository {
 
-    /**
-     * Tente de connecter un utilisateur et de récupérer ses informations.
-     * MODIFIÉ : Retourne maintenant un objet User complet en cas de succès.
-     *
-     * @return Un objet [Result] qui encapsule :
-     *         - [Result.success(User)] si la connexion et la récupération ont réussi.
-     *         - [Result.failure(Exception)] si l'une des étapes a échoué.
-     */
     suspend fun login(email: String, password: String): Result<User>
 
+    fun startPhoneNumberVerification(
+        phoneNumber: String,
+        activity: Activity,
+        callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
+    )
+
+    suspend fun signInWithPhoneAuthCredential(verificationId: String, otpCode: String): Result<User>
+
+    suspend fun registerUser(name: String, phoneNumber: String, email: String, password: String): Result<User>
+
+    suspend fun checkIfPhoneNumberExists(phoneNumber: String): Result<Boolean>
+
+    suspend fun getCurrentUser(): Result<User>
+
+    // MODIFICATION : Ajout de la fonction de déconnexion au contrat.
+    // C'est une fonction simple qui n'a pas besoin de retourner de valeur.
+    fun logout()
 }

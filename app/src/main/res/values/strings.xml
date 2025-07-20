@@ -9,26 +9,25 @@
     <string name="bottom_nav_consumption">Consommation</string>
     <string name="bottom_nav_offers">Offres</string>
     <string name="bottom_nav_billing">Factures</string>
-    <!-- Dans res/values/strings.xml -->
+    <string name="action_promos">Promos</string>
+    <string name="action_wheel_of_chance">Roue chance</string>
     <string name="dashboard_welcome_message">Bonjour, %s !</string>
     <string name="action_recharge">Recharge</string>
     <string name="action_buy_option">Achat</string>
     <string name="action_sos">SOS Solde</string>
     <string name="action_pay_bill">Facture</string>
     <string name="bottom_nav_support">Support</string>
-
-    <color name="rose_primary">#F06292</color>       <!-- Rose doux -->
-    <color name="rose_light">#F8BBD0</color>         <!-- Rose clair -->
-    <color name="rose_dark">#C2185B</color>
-
-    <color name="rose_pastel_1">#FADADD</color>      <!-- Rose poudré -->
-    <color name="rose_pastel_2">#FDCFE8</color>      <!-- Rose dragée -->
-    <color name="rose_pastel_3">#FFE0EB</color>      <!-- Rose très clair -->
-    <!-- Rose profond -->
-    <color name="colorPrimary">#7E57C2</color>         <!-- Violet profond -->
-    <color name="colorAccent">#F8BBD0</color>          <!-- Rose clair -->
-    <color name="colorSecondary">#B76E79</color>       <!-- Rose gold -->
-    <color name="colorSurface">#F3E5F5</color>         <!-- Fond neutre lavande -->
+    <!-- Dans res/values/strings.xml -->
+    <string name="action_transfer_internet">Transfert net</string>
+    <string name="action_transfer_credit">Transfert crédit</string>
+    <string name="action_pay_invoice">Paiement facture</string>
+    <string name="action_roaming">Roaming international</string>
+    <!-- Dans res/values/strings.xml -->
+    <string name="action_my_claims">Mes réclamations</string>
+    <string name="action_chat_expert">Chattez expert</string>
+    <string name="action_stores">Boutiques</string>
+    <string name="action_customer_service">Service client</string>
+          <!-- Fond neutre lavande -->
 
 
 </resources>

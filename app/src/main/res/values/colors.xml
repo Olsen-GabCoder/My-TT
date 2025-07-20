@@ -11,5 +11,16 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="grey">#888888</color>
+    <color name="rose_primary">#F06292</color>       <!-- Rose doux -->
+    <color name="rose_light">#F8BBD0</color>         <!-- Rose clair -->
+    <color name="rose_dark">#C2185B</color>
 
+    <color name="rose_pastel_1">#FADADD</color>      <!-- Rose poudré -->
+    <color name="rose_pastel_2">#FDCFE8</color>      <!-- Rose dragée -->
+    <color name="rose_pastel_3">#FFE0EB</color>      <!-- Rose très clair -->
+    <!-- Rose profond -->
+    <color name="colorPrimary">#7E57C2</color>         <!-- Violet profond -->
+    <color name="colorAccent">#F8BBD0</color>          <!-- Rose clair -->
+    <color name="colorSecondary">#B76E79</color>       <!-- Rose gold -->
+    <color name="colorSurface">#F3E5F5</color>
 </resources>

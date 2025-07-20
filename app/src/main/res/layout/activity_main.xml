@@ -7,12 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".features.client.MainActivity">
 
-    <!--
-        MODIFICATION 1 : Le NavHostFragment ne remplit plus tout l'écran.
-        Sa contrainte inférieure est maintenant attachée au-dessus de la barre de navigation.
-        Sa hauteur passe à "0dp" pour remplir l'espace disponible entre le haut de l'écran
-        et le haut de la barre de navigation.
-    -->
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/nav_host_fragment_client"
         android:name="androidx.navigation.fragment.NavHostFragment"
@@ -25,11 +19,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/client_nav_graph" />
 
-    <!--
-        MODIFICATION 2 : Ajout de la BottomNavigationView.
-        Elle est contrainte en bas de l'écran et utilise le menu
-        que nous avons créé à l'étape précédente.
-    -->
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav_view"
         android:layout_width="0dp"
@@ -37,6 +26,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/client_bottom_nav_menu" />
+        app:menu="@menu/client_bottom_nav_menu"
+        style="@style/Widget.MyTT.BottomNavigationView" /> <!-- << LIGNE AJOUTÉE -->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

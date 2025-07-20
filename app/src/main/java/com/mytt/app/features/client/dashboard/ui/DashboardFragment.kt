@@ -1,5 +1,3 @@
-// Fichier : app/src/main/java/com/mytt/app/features/client/dashboard/ui/DashboardFragment.kt
-
 package com.mytt.app.features.client.dashboard.ui
 
 import android.os.Bundle
@@ -12,11 +10,16 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.mytt.app.R
 import com.mytt.app.core.data.models.PromoOffer
+import com.mytt.app.core.data.models.PromotionItem
+import com.mytt.app.core.data.models.User
 import com.mytt.app.databinding.FragmentDashboardBinding
 import com.mytt.app.features.client.dashboard.ui.adapters.DashboardActionAdapter
 import com.mytt.app.features.client.dashboard.ui.adapters.PromoOfferAdapter
+import com.mytt.app.features.client.dashboard.ui.adapters.PromotionsAdapter
 import com.mytt.app.features.client.dashboard.ui.models.DashboardAction
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.NumberFormat
+import java.util.Locale
 
 @AndroidEntryPoint
 class DashboardFragment : Fragment() {
@@ -36,53 +39,63 @@ class DashboardFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // On appelle nos fonctions de configuration.
-        setupUI() // << MODIFICATION : regroupement pour plus de clarté
-        observeViewModel() // << MODIFICATION : séparation de l'observation
+        setupUI()
+        observeViewModel()
     }
 
-    /**
-     * NOUVEAU : Regroupe la configuration des vues statiques.
-     */
     private fun setupUI() {
-        setupBalanceCard()
+        setupClickListeners()
         setupShortcutsRecyclerView()
+        setupPromotionsRecyclerView()
+        setupPaymentRecyclerView()
+        setupHelpRecyclerView()
         setupPromoOffersRecyclerView()
     }
 
-    /**
-     * NOUVEAU : Gère l'observation des données du ViewModel.
-     * C'est ici que nous allons corriger la régression.
-     */
     private fun observeViewModel() {
-        // CORRECTION : On observe le nom de l'utilisateur et on met à jour le TextView.
-        viewModel.userName.observe(viewLifecycleOwner) { name ->
-            binding.textViewUserName.text = getString(R.string.dashboard_welcome_message, name)
+        viewModel.user.observe(viewLifecycleOwner) { user ->
+            binding.textViewUserName.text = getString(R.string.dashboard_welcome_message, user.name)
+            updateBalanceCard(user.balance)
         }
 
-        // Ici, on pourrait aussi observer le solde pour le mettre à jour dynamiquement.
-        // viewModel.balance.observe(viewLifecycleOwner) { balance ->
-        //     binding.viewBalanceCardV2.textViewBalanceAmount.text = balance
-        // }
+        viewModel.error.observe(viewLifecycleOwner) { errorMessage ->
+            Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_LONG).show()
+        }
     }
 
-
     /**
-     * Configure la carte de solde en affichant les données.
+     * Met à jour la carte de solde avec la valeur fournie.
+     * Formate le nombre pour un affichage localisé et propre (ex: "14,750").
+     * @param balance Le solde à afficher.
      */
-    private fun setupBalanceCard() {
-        val userBalance = "0.025"
+    private fun updateBalanceCard(balance: Double) {
         val balanceCardBinding = binding.viewBalanceCardV2
-        balanceCardBinding.textViewBalanceAmount.text = userBalance
-        balanceCardBinding.fabRecharge.setOnClickListener {
-            Toast.makeText(requireContext(), "Bouton Recharge rapide cliqué !", Toast.LENGTH_SHORT).show()
+        val numberFormat = NumberFormat.getNumberInstance(Locale.FRANCE).apply {
+            minimumFractionDigits = 3
+            maximumFractionDigits = 3
         }
+        val formattedBalance = numberFormat.format(balance)
+        balanceCardBinding.textViewBalanceAmount.text = formattedBalance
     }
 
     /**
-     * Configure le RecyclerView pour la section "Raccourcis".
+     * Configure les listeners de clics statiques de l'interface.
      */
+    private fun setupClickListeners() {
+        binding.viewBalanceCardV2.fabRecharge.setOnClickListener {
+            Toast.makeText(requireContext(), "Bouton Recharge rapide cliqué !", Toast.LENGTH_SHORT).show()
+            // Plus tard : findNavController().navigate(R.id.action_to_recharge)
+        }
+
+        // MODIFICATION AJOUTÉE : Ajout du listener pour le bouton profil.
+        // L'ID 'button_profile' vient de votre layout fragment_dashboard.xml
+        binding.buttonProfile.setOnClickListener {
+            // Utilise l'action que nous avons définie dans le graphe de navigation.
+            findNavController().navigate(R.id.action_dashboardFragment_to_profileFragment)
+        }
+    }
+
+
     private fun setupShortcutsRecyclerView() {
         val shortcutActions = listOf(
             DashboardAction(R.string.action_recharge, R.drawable.ic_recharge, R.id.consumptionFragment),
@@ -96,9 +109,55 @@ class DashboardFragment : Fragment() {
         binding.recyclerViewShortcuts.adapter = shortcutsAdapter
     }
 
-    /**
-     * Configure le RecyclerView pour le carrousel d'offres promotionnelles.
-     */
+    private fun setupPromotionsRecyclerView() {
+        val promotionItems = listOf(
+            PromotionItem.FeaturedOffer(
+                title = "Double",
+                subtitle = "validité",
+                imageResId = R.drawable.promo_image_double_validite,
+                destinationId = R.id.offersFragment
+            ),
+            PromotionItem.StandardAction(
+                DashboardAction(R.string.action_promos, R.drawable.ic_promos, R.id.offersFragment)
+            ),
+            PromotionItem.StandardAction(
+                DashboardAction(R.string.action_wheel_of_chance, R.drawable.ic_wheel_of_chance, R.id.offersFragment)
+            )
+        )
+        val promotionsAdapter = PromotionsAdapter(promotionItems) { destinationId ->
+            destinationId?.let {
+                findNavController().navigate(it)
+            }
+        }
+        binding.recyclerViewPromotions.adapter = promotionsAdapter
+    }
+
+    private fun setupPaymentRecyclerView() {
+        val paymentActions = listOf(
+            DashboardAction(R.string.action_transfer_internet, R.drawable.ic_transfer_internet, R.id.invoicesFragment),
+            DashboardAction(R.string.action_transfer_credit, R.drawable.ic_transfer_credit, R.id.invoicesFragment),
+            DashboardAction(R.string.action_pay_invoice, R.drawable.ic_pay_invoice, R.id.invoicesFragment),
+            DashboardAction(R.string.action_roaming, R.drawable.ic_roaming, R.id.offersFragment)
+        )
+        val paymentAdapter = DashboardActionAdapter(paymentActions) { destinationId ->
+            findNavController().navigate(destinationId)
+        }
+        binding.recyclerViewPayment.adapter = paymentAdapter
+    }
+
+    private fun setupHelpRecyclerView() {
+        val helpActions = listOf(
+            DashboardAction(R.string.action_my_claims, R.drawable.ic_my_claims, R.id.contactSupportFragment),
+            DashboardAction(R.string.action_chat_expert, R.drawable.ic_chat_expert, R.id.contactSupportFragment),
+            DashboardAction(R.string.action_stores, R.drawable.ic_stores, R.id.contactSupportFragment),
+            DashboardAction(R.string.action_customer_service, R.drawable.ic_customer_service, R.id.contactSupportFragment)
+        )
+        val helpAdapter = DashboardActionAdapter(helpActions) { destinationId ->
+            findNavController().navigate(destinationId)
+        }
+        binding.recyclerViewHelp.adapter = helpAdapter
+    }
+
     private fun setupPromoOffersRecyclerView() {
         val promoOffers = listOf(
             PromoOffer(
@@ -112,20 +171,13 @@ class DashboardFragment : Fragment() {
                 subtitle = "Voyagez connecté à petit prix",
                 localImageResId = R.drawable.promo_image_2,
                 destinationId = R.id.offersFragment
-            ),
-            PromoOffer(
-                title = "Info Service",
-                subtitle = "Découvrez nos nouveaux services",
-                localImageResId = R.drawable.promo_image_1,
-                destinationId = null
             )
         )
         val promoOfferAdapter = PromoOfferAdapter(promoOffers) { destinationId ->
-            findNavController().navigate(destinationId)
+            destinationId?.let { findNavController().navigate(it) }
         }
         binding.recyclerViewPromoOffers.adapter = promoOfferAdapter
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()
